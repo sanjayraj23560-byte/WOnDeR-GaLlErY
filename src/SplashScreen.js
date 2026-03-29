@@ -5,12 +5,10 @@ function SplashScreen({ onDone }) {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Start fade out at 1.2s
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
     }, 1200);
 
-    // Fully remove at 1.7s (after fade animation completes)
     const removeTimer = setTimeout(() => {
       setVisible(false);
       onDone();
@@ -20,7 +18,7 @@ function SplashScreen({ onDone }) {
       clearTimeout(fadeTimer);
       clearTimeout(removeTimer);
     };
-  }, []);
+  }, [onDone]);   // ✅ FIX — added onDone here
 
   if (!visible) return null;
 
